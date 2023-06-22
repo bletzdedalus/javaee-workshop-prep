@@ -1,8 +1,6 @@
 package com.dedalus.resources;
 
 import com.dedalus.entity.AnimalEntity;
-import com.dedalus.entity.AnimalRepository;
-import com.dedalus.entity.AnimalType;
 import com.dedalus.error.AlreadyAdoptedException;
 import com.dedalus.error.AnimalNotFoundException;
 import com.dedalus.error.InvalidAnimalTypeException;
@@ -11,28 +9,21 @@ import com.dedalus.model.CreateAnimalModel;
 import com.dedalus.model.FullAnimalModel;
 import com.dedalus.model.ListAnimalModel;
 import com.dedalus.service.NinjaAnimalService;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.vertx.core.cli.annotations.Description;
-import org.eclipse.microprofile.openapi.annotations.servers.Server;
 
 import javax.inject.Inject;
-import javax.naming.OperationNotSupportedException;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Path("/resource/animal")
 @Transactional
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AnimalResource {
-    @Inject
-    AnimalRepository repository;
-
     @Inject
     NinjaAnimalService ninjaAnimalService;
 

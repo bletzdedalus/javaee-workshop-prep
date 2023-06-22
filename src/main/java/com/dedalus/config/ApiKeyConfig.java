@@ -8,5 +8,9 @@ import javax.enterprise.context.ApplicationScoped;
 public class ApiKeyConfig {
 
     @ConfigProperty(name = "API_NINJA_KEY")
-    public String apiNinjaKey;
+    String apiNinjaKey;
+
+    public String getApiNinjaKey() {
+        return apiNinjaKey;
+    }
 }

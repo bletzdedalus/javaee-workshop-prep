@@ -6,10 +6,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.QueryParam;
+import java.util.List;
 
 @ApplicationScoped
 @RegisterRestClient(baseUri = "https://api.api-ninjas.com/v1/animals")
 public interface NinjaAnimalRestClient {
     @GET
-    NinjaAnimalModel getNinjaAnimal(@HeaderParam("X-Api-Key") String key, @QueryParam("name") String name);
+    List<NinjaAnimalModel> getNinjaAnimal(@HeaderParam("X-Api-Key") String key, @QueryParam("name") String name);
 }

@@ -19,8 +19,6 @@ public class AnimalEntity extends PanacheEntity {
 
     public boolean available;
 
-    public Origin origin;
-
     public static List<AnimalEntity> listAvailable(){
         List<AnimalEntity> animalList = AnimalEntity.list("available", true);
         return animalList;

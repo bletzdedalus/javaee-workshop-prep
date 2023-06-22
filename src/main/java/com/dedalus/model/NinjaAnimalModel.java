@@ -1,7 +1,10 @@
 package com.dedalus.model;
 
+import java.util.ArrayList;
+
 public class NinjaAnimalModel {
- NinjaAnimalRoot root;
- NinjaAnimalCharacteristics characteristics;
- NinjaAnimalTaxonomy taxonomy;
+    public String name;
+    public NinjaAnimalCharacteristics characteristics;
+    public NinjaAnimalTaxonomy taxonomy;
+    public ArrayList<String> locations;
 }
