@@ -17,11 +17,17 @@ public class FullAnimalModel {
 
     public Long id;
 
+    public NinjaAnimalModel additionalInfo;
+
     public FullAnimalModel (AnimalEntity animalEntity) {
         this.animalType = animalEntity.animalType.toString();
         this.name = animalEntity.name;
         this.comment=animalEntity.comment;
         this.id= animalEntity.id;
         this.available= animalEntity.available;
+    }
+
+    public void setAdditionalInfo(NinjaAnimalModel additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }

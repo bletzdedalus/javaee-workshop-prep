@@ -10,6 +10,7 @@ import com.dedalus.error.InvalidIdentifierException;
 import com.dedalus.model.CreateAnimalModel;
 import com.dedalus.model.FullAnimalModel;
 import com.dedalus.model.ListAnimalModel;
+import com.dedalus.service.NinjaAnimalService;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.vertx.core.cli.annotations.Description;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
@@ -67,6 +68,8 @@ public class AnimalResource {
             throw new AnimalNotFoundException("Animal not found");
         }
         FullAnimalModel fullAnimalModel = new FullAnimalModel(animalEntity);
+        NinjaAnimalService ninjaAnimalService = new NinjaAnimalService();
+        fullAnimalModel.setAdditionalInfo(ninjaAnimalService.getNinjaAnimal(fullAnimalModel.animalType));
         return fullAnimalModel;
     }
 
