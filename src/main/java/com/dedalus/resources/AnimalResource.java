@@ -33,6 +33,9 @@ public class AnimalResource {
     @Inject
     AnimalRepository repository;
 
+    @Inject
+    NinjaAnimalService ninjaAnimalService;
+
     @POST
     @Description("Creates a new animal in database")
     @Path("create")
@@ -68,7 +71,6 @@ public class AnimalResource {
             throw new AnimalNotFoundException("Animal not found");
         }
         FullAnimalModel fullAnimalModel = new FullAnimalModel(animalEntity);
-        NinjaAnimalService ninjaAnimalService = new NinjaAnimalService();
         fullAnimalModel.setAdditionalInfo(ninjaAnimalService.getNinjaAnimal(fullAnimalModel.animalType));
         return fullAnimalModel;
     }
