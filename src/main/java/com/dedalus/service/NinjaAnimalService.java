@@ -1,6 +1,7 @@
 package com.dedalus.service;
 
 import com.dedalus.config.ApiKeyConfig;
+import com.dedalus.error.InvalidApiResultException;
 import com.dedalus.model.NinjaAnimalModel;
 import io.quarkus.cache.CacheResult;
 import org.eclipse.microprofile.faulttolerance.Fallback;
@@ -27,21 +28,26 @@ public class NinjaAnimalService {
     public NinjaAnimalModel getNinjaAnimal(String name) {
 
         NinjaAnimalModel ninjaAnimalModel = ninjaAnimalRestClient.getNinjaAnimal(apiKeyConfig.getApiNinjaKey(), name).get(0);
-        boolean valid = validateNinjaAnimal(ninjaAnimalModel);
-        if(!valid){
+        try {
+            validateNinjaAnimal(ninjaAnimalModel);
+        } catch (InvalidApiResultException e) {
+            e.printStackTrace();
             return null;
         }
         return ninjaAnimalModel;
     }
 
-    public boolean validateNinjaAnimal(NinjaAnimalModel ninjaAnimalModel){
+    public void validateNinjaAnimal(NinjaAnimalModel ninjaAnimalModel) throws InvalidApiResultException {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<NinjaAnimalModel>> violations = validator.validate(ninjaAnimalModel);
+        StringBuilder violationsString = new StringBuilder();
         for (ConstraintViolation<NinjaAnimalModel> violation : violations) {
-            System.err.println(violation);
+            violationsString.append(violation.getMessage()).append("\n");
         }
-        return violations.size() <= 0;
+        if(!violationsString.toString().isEmpty()){
+            throw new InvalidApiResultException(violationsString.toString());
+        }
     }
 
     public NinjaAnimalModel fallback(String name){

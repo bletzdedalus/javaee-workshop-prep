@@ -43,7 +43,6 @@ public class AnimalResource {
     @GET
     @Description("Lists all available animals")
     @Path("listAvailable")
-    // TODO: AS VIEW @Clemens
     public List<ListAnimalModel> listAvailableAnimal() {
         List<AnimalEntity> animalEntities = AnimalEntity.listAvailable();
         List<ListAnimalModel> listAnimalModels = new ArrayList<>();
